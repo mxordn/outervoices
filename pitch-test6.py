@@ -35,9 +35,12 @@ for elem in tharsisNotes.flat:
             print slice[everye].offset
             if slice[everye].offset > newPart.highestOffset:
                 newnote = compare_pitch_high(slice)
-                exnote = newPart.flat.getElementsByOffset(newPart.highestOffset, classList= note.Note)
-                print newnote, exnote[0].pitch
-                if newnote.pitch != exnote[0].pitch:
+                exnote1 = newPart.flat.getElementsByOffset(newPart.highestOffset, classList= note.Note)
+                exnote2 = note.Note()
+                exnote2 = exnote1[0]
+                print exnote2
+#                print newnote, exnote[0].pitch
+                if newnote != exnote2:
                     newPart.append(newnote)
             else:
                 print "Nothing to be done here."
