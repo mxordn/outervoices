@@ -37,5 +37,6 @@ for elem in tharsisNotes.flat:
 #        of = temp.offset
     print "--"
 
-os.append(newPart)
+print newPart
+#os.append(newPart)
 #os.show()
