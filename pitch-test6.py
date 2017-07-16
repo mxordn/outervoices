@@ -4,7 +4,7 @@ tharsis = stream.Stream()
 tharsis = converter.parse("12_reges2.xml")
 stmpPart = stream.Stream()
 newPartHigh = stream.Part()
-newPartLoW = stream.Part()
+newPartLow = stream.Part()
 os = stream.Stream()
 tharsisNotes = tharsis.flat.getElementsByClass(note.Note)
 
@@ -53,7 +53,23 @@ for elem in tharsisNotes.flat:
 
 
 #LOWEST VOICE
+for elem in tharsisNotes.flat:
+    num = elem.offset
+    slice = tharsisNotes.flat.getElementsByOffset(num, mustBeginInSpan = False, mustFinishInSpan = False)
+    if len(slice) > 1:
+        for everye in range(len(slice)):
+            if slice[everye].offset > newPartLow.highestOffset:
+                newnote = compare_pitch_low(slice)
+                exnote1 = newPartLow.flat.getElementsByOffset(newPartLow.highestOffset, classList= note.Note)
+                exnote2 = exnote1[0]
+                if newnote != exnote2:
+                    newPartLow.append(newnote)
+            else:
+                print "Nothing to be done here."
+    else:
+        newPartLow.append(slice[0])
+    print "--"
 
 os.insert(newPartHigh)
-#os.insert(newPartLow)
+os.insert(newPartLow)
 os.show()
